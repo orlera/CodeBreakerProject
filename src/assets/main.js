@@ -18,7 +18,7 @@ function guess() {
 			console.log('hidden set');
 		}
 		attempt.value = parseInt(attempt.value) + 1;
-		getResult(input.value);
+		getResults(input.value);
 	}
 	else {
 		return false;
@@ -47,7 +47,7 @@ function validateInput(input) {
 	}
 }
 
-function getResult(input) {
+function getResults(input) {
 	let result = '<div class="row"><span class="col-md-6">' + input + '</span><div class="col-md-6">';
 	let char_res = '';
 	let ans = answer.value;
