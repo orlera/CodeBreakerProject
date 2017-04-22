@@ -10,20 +10,21 @@ let attempt = document.getElementById('attempt');
 function guess() {
     let input = document.getElementById('user-guess');
 
-	console.log('guessing');
     if (validateInput(input.value)) {
-		console.log('valid input');
 		if (answer.value == '' && attempt.value == '') { 
 		    setHiddenFields();
-			console.log('hidden set');
 		}
 		attempt.value = parseInt(attempt.value) + 1;
 		if (getResults(input.value)) {
 			setMessage("You Win! :)");
+			showAnswer(true);
+			showReplay();
 		}
 		else {
 			if (parseInt(attempt.value) >= 10) {
 				setMessage("You Lose! :(");
+				showAnswer(false);
+				showReplay();
 			}
 			else {
 				setMessage("Incorrect, try again.");
@@ -81,4 +82,18 @@ function getResults(input) {
 	result = document.getElementById('results').innerHTML + result;
 	document.getElementById('results').innerHTML = result;
 	return correct;
+}
+
+function showAnswer(success) {
+	let classToAdd = ' failure';
+	document.getElementById('code').innerHTML = answer.value;
+	if (success) {
+		classToAdd = ' success';
+	}
+	document.getElementById('code').className += classToAdd;
+}
+
+function showReplay() {
+	document.getElementById('guessing-div').style.display = 'none';
+	document.getElementById('replay-div').style.display = 'block';
 }
